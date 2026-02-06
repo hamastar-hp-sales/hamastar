@@ -64,8 +64,8 @@ export function StatsSection() {
             <CardTitle className="text-lg font-black">歷年工地負責人分佈 (民國 107~115 年)</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-72">
-              <ResponsiveContainer width="100%" height="100%">
+            <div className="h-72 min-h-[288px] w-full">
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={200}>
                 <BarChart data={officialStats.yearlyDistribution}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
                   <XAxis 
@@ -104,8 +104,8 @@ export function StatsSection() {
             <CardTitle className="text-lg font-black">證照與年資分佈</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col gap-6">
-            <div className="h-44">
-              <ResponsiveContainer width="100%" height="100%">
+            <div className="h-44 min-h-[176px] w-full">
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={140}>
                 <PieChart>
                   <Pie
                     data={officialStats.certStatus}

@@ -29,6 +29,14 @@ const steps = [
 ]
 
 export function RegistrationPage() {
+  return (
+    <React.Suspense fallback={<div className="mx-auto max-w-7xl px-4 py-8 lg:px-6"><div className="text-center text-muted-foreground">載入中...</div></div>}>
+      <RegistrationPageContent />
+    </React.Suspense>
+  )
+}
+
+function RegistrationPageContent() {
   const searchParams = useSearchParams()
   const classIdFromUrl = searchParams.get("classId")
   

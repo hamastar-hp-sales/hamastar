@@ -1,12 +1,14 @@
 "use client"
 
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { officialStats } from "@/lib/mock-data"
 import { Users, Award, TrendingUp, History } from "lucide-react"
 import { Bar, BarChart, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from "recharts"
 
 export function StatsSection() {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => { setMounted(true) }, [])
   return (
     <section className="mt-0 flex flex-col gap-6">
       {/* Main Stat Cards */}
@@ -64,36 +66,38 @@ export function StatsSection() {
             <CardTitle className="text-lg font-black">歷年工地負責人分佈 (民國 107~115 年)</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-72">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={officialStats.yearlyDistribution}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
-                  <XAxis 
-                    dataKey="year" 
-                    tick={{ fontSize: 13, fontWeight: 700, fill: "hsl(var(--foreground))" }} 
-                    axisLine={false}
-                    tickLine={false}
-                    label={{ value: '年度', position: 'insideBottomRight', offset: -5, fontSize: 12, fontWeight: 700 }}
-                  />
-                  <YAxis 
-                    tick={{ fontSize: 12, fontWeight: 700, fill: "hsl(var(--foreground))" }} 
-                    axisLine={false}
-                    tickLine={false}
-                    label={{ value: '人數', angle: -90, position: 'insideLeft', fontSize: 12, fontWeight: 700 }}
-                  />
-                  <Tooltip
-                    cursor={{ fill: 'hsl(var(--muted))', opacity: 0.4 }}
-                    contentStyle={{
-                      backgroundColor: "hsl(var(--card))",
-                      border: "1px solid hsl(var(--border))",
-                      borderRadius: "8px",
-                      fontSize: "14px",
-                      fontWeight: 700
-                    }}
-                  />
-                  <Bar dataKey="count" name="新增人數" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} barSize={32} />
-                </BarChart>
-              </ResponsiveContainer>
+            <div className="h-72 w-full">
+              {mounted ? (
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={officialStats.yearlyDistribution}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
+                    <XAxis 
+                      dataKey="year" 
+                      tick={{ fontSize: 13, fontWeight: 700, fill: "hsl(var(--foreground))" }} 
+                      axisLine={false}
+                      tickLine={false}
+                      label={{ value: '年度', position: 'insideBottomRight', offset: -5, fontSize: 12, fontWeight: 700 }}
+                    />
+                    <YAxis 
+                      tick={{ fontSize: 12, fontWeight: 700, fill: "hsl(var(--foreground))" }} 
+                      axisLine={false}
+                      tickLine={false}
+                      label={{ value: '人數', angle: -90, position: 'insideLeft', fontSize: 12, fontWeight: 700 }}
+                    />
+                    <Tooltip
+                      cursor={{ fill: 'hsl(var(--muted))', opacity: 0.4 }}
+                      contentStyle={{
+                        backgroundColor: "hsl(var(--card))",
+                        border: "1px solid hsl(var(--border))",
+                        borderRadius: "8px",
+                        fontSize: "14px",
+                        fontWeight: 700
+                      }}
+                    />
+                    <Bar dataKey="count" name="新增人數" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} barSize={32} />
+                  </BarChart>
+                </ResponsiveContainer>
+              ) : null}
             </div>
           </CardContent>
         </Card>
@@ -104,26 +108,28 @@ export function StatsSection() {
             <CardTitle className="text-lg font-black">證照與年資分佈</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col gap-6">
-            <div className="h-44">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={officialStats.certStatus}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={45}
-                    outerRadius={65}
-                    paddingAngle={5}
-                    dataKey="value"
-                  >
-                    {officialStats.certStatus.map((entry, index) => (
-                      <Cell key={index} fill={entry.fill} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                  <Legend verticalAlign="bottom" height={36} iconType="circle" wrapperStyle={{ fontSize: '13px', fontWeight: 700 }} />
-                </PieChart>
-              </ResponsiveContainer>
+            <div className="h-44 w-full">
+              {mounted ? (
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={officialStats.certStatus}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={45}
+                      outerRadius={65}
+                      paddingAngle={5}
+                      dataKey="value"
+                    >
+                      {officialStats.certStatus.map((entry, index) => (
+                        <Cell key={index} fill={entry.fill} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                    <Legend verticalAlign="bottom" height={36} iconType="circle" wrapperStyle={{ fontSize: '13px', fontWeight: 700 }} />
+                  </PieChart>
+                </ResponsiveContainer>
+              ) : null}
             </div>
             
             <div className="space-y-4">

@@ -58,8 +58,8 @@ export function AdminDashboardPage() {
             <CardTitle className="text-base">近半年培訓與核證趨勢</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-72">
-              <ResponsiveContainer width="100%" height="100%">
+            <div className="h-72 w-full min-h-[288px]">
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={200}>
                 <BarChart data={monthlyData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                   <XAxis dataKey="month" tick={{ fontSize: 12 }} />
@@ -88,8 +88,8 @@ export function AdminDashboardPage() {
             <CardTitle className="text-base">文資類型分布</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-72">
-              <ResponsiveContainer width="100%" height="100%">
+            <div className="h-72 w-full min-h-[288px]">
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={200}>
                 <PieChart>
                   <Pie
                     data={categoryData}

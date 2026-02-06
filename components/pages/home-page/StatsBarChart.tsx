@@ -13,7 +13,7 @@ import {
 
 export default function StatsBarChart() {
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height={288}>
       <BarChart data={officialStats.yearlyDistribution}>
         <CartesianGrid
           strokeDasharray="3 3"

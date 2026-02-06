@@ -12,7 +12,7 @@ import {
 
 export default function StatsPieChart() {
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height={176}>
       <PieChart>
         <Pie
           data={officialStats.certStatus}
